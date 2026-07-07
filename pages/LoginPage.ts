@@ -38,4 +38,10 @@ export class LoginPage {
         await this.preencherSenha(password);
         await this.clicarEntrar();
     }
+    async loginComoUsuarioValido() {
+    await this.realizarLogin(
+        'customer@practicesoftwaretesting.com',
+        'welcome01'
+    );
+}
 }
