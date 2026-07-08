@@ -13,11 +13,14 @@ test('Pesquisar e abrir produto com sucesso', async ({ page }) => {
 
     await productPage.openProduct('Pliers');
 
-    await page.pause();
-
     const nomeProduto = await productPage.obterNomeProduto();
     const precoProduto = await productPage.getProductPrice();
 
     expect(nomeProduto).toContain('Pliers');
     expect(precoProduto).not.toBeNull();
+    await productPage.addToCart();
+
+const quantidade = await productPage.getCartQuantity();
+
+expect(quantidade).toBe('1');
 });

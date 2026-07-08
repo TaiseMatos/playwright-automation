@@ -7,6 +7,8 @@ export class ProductPage {
     readonly productName: Locator;
     readonly productPrice: Locator;
     readonly searchButton: Locator;
+    readonly addToCartButton: Locator;
+    readonly cartQuantity: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -15,6 +17,10 @@ export class ProductPage {
         this.productName = page.locator('[data-test="product-name"]');
         this.productPrice = page.locator('[data-test="unit-price"]');
         this.searchButton = page.getByRole('button', { name: 'Search' });
+        this.addToCartButton = page.getByRole('button', { name: 'Add to cart' });
+        this.cartQuantity = page
+    .getByRole('link', { name: /cart/i })
+    .locator('span');
     }
     async pesquisarProduto(nomeProduto: string) {
        await this.searchInput.fill(nomeProduto);
@@ -37,5 +43,11 @@ async openProduct(nomeProduto: string) {
 getProductPrice() {
     return this.productPrice.first().textContent();
 }
+async addToCart() {
+    await this.addToCartButton.click();
+}
 
+async getCartQuantity() {
+    return this.cartQuantity.textContent();
+}
 }
