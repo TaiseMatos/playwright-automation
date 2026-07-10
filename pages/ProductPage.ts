@@ -9,6 +9,9 @@ export class ProductPage {
     readonly searchButton: Locator;
     readonly addToCartButton: Locator;
     readonly cartQuantity: Locator;
+    readonly decreaseQuantityButton: Locator;
+    readonly increaseQuantityButton: Locator;
+    readonly quantityInput: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -21,6 +24,9 @@ export class ProductPage {
         this.cartQuantity = page
     .getByRole('link', { name: /cart/i })
     .locator('span');
+       this.increaseQuantityButton = page.getByRole('button', { name: 'Increase quantity' });
+       this.decreaseQuantityButton = page.getByRole('button', { name: 'Decrease quantity' });
+       this.quantityInput = page.getByRole('spinbutton', { name: 'Quantity' });
     }
     async pesquisarProduto(nomeProduto: string) {
        await this.searchInput.fill(nomeProduto);
@@ -50,4 +56,16 @@ async addToCart() {
 async getCartQuantity() {
     return this.cartQuantity.textContent();
 }
+
+async increaseQuantity() {
+    await this.increaseQuantityButton.click();
 }
+
+async decreaseQuantity() {
+    await this.decreaseQuantityButton.click();
+}
+
+async getQuantity() {
+    return this.quantityInput.inputValue();
+}
+} // <-- AQUI fecha a classe
