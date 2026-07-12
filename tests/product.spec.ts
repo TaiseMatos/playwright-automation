@@ -8,26 +8,24 @@ test.beforeEach(async ({ page }) => {
     await productPage.acessarHome();
 });
 
-test('Pesquisar e abrir produto com sucesso', async ({ page }) => {
+test('Pesquisar e abrir produto com sucesso', async () => {
     await productPage.pesquisarProduto('Pliers');
-
     await productPage.openProduct('Pliers');
+
+    await productPage.increaseQuantity();
+    await productPage.increaseQuantity();
 
     const nomeProduto = await productPage.obterNomeProduto();
     const precoProduto = await productPage.getProductPrice();
+    const quantidadeProduto = await productPage.getQuantity();
 
     expect(nomeProduto).toContain('Pliers');
     expect(precoProduto).not.toBeNull();
+    expect(quantidadeProduto).toBe('3');
+
     await productPage.addToCart();
 
-const quantidade = await productPage.getCartQuantity();
+    const quantidadeCarrinho = await productPage.getCartQuantity();
 
-expect(quantidade).toBe('1');
-
-await productPage.increaseQuantity();
-
-const quantidadeProduto = await productPage.getQuantity();
-
-expect(quantidadeProduto).toBe('2');
+    expect(quantidadeCarrinho).toBe('3');
 });
-
