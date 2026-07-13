@@ -12,6 +12,8 @@ export class ProductPage {
     readonly decreaseQuantityButton: Locator;
     readonly increaseQuantityButton: Locator;
     readonly quantityInput: Locator;
+    readonly removeButton: Locator;
+    readonly cartLink: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -27,6 +29,8 @@ export class ProductPage {
        this.increaseQuantityButton = page.getByRole('button', { name: 'Increase quantity' });
        this.decreaseQuantityButton = page.getByRole('button', { name: 'Decrease quantity' });
        this.quantityInput = page.getByRole('spinbutton', { name: 'Quantity' });
+       this.removeButton = page.locator('a.btn.btn-danger');
+       this.cartLink = page.getByRole('link', { name: /cart/i });
     }
     async pesquisarProduto(nomeProduto: string) {
        await this.searchInput.fill(nomeProduto);
@@ -68,4 +72,11 @@ async decreaseQuantity() {
 async getQuantity() {
     return this.quantityInput.inputValue();
 }
-} // <-- AQUI fecha a classe
+
+async removeProduct() {
+    await this.removeButton.click();
+}
+async openCart() {
+    await this.cartLink.click();
+}
+} // <-- esta é a chave que fecha a classe ProductPage

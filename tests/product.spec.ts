@@ -24,8 +24,11 @@ test('Pesquisar e abrir produto com sucesso', async () => {
     expect(quantidadeProduto).toBe('3');
 
     await productPage.addToCart();
-
+    await productPage.openCart();
+    await productPage.removeProduct();
     const quantidadeCarrinho = await productPage.getCartQuantity();
 
     expect(quantidadeCarrinho).toBe('3');
+
+   
 });
