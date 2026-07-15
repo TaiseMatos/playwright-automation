@@ -79,4 +79,9 @@ async removeProduct() {
 async openCart() {
     await this.cartLink.click();
 }
+async validateProductRemoved(nomeProduto: string) {
+    await this.page
+        .getByText(nomeProduto, { exact: true })
+        .waitFor({ state: 'detached' });
+}
 } // <-- esta é a chave que fecha a classe ProductPage
