@@ -4,8 +4,13 @@ export const loginData = {
     senha: "welcome01",
   },
 
-  usuarioInvalido: {
+  senhaInvalida: {
+    email: "customer@practicesoftwaretesting.com",
+    senha: "senhaErrada",
+  },
+
+  emailInvalido: {
     email: "cliente@teste.com",
-    senha: "123456",
+    senha: "welcome01",
   },
 };
