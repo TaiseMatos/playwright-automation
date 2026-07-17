@@ -22,10 +22,20 @@ test('Pesquisar e abrir produto com sucesso', async ({ page }) => {
     expect(nomeProduto).toContain('Pliers');
     expect(precoProduto).not.toBeNull();
     expect(quantidadeProduto).toBe('3');
+});
+    test('Remover produto do carrinho', async ({ page }) => {
+    // preparar o cenário
 
+    await productPage.pesquisarProduto('Pliers');
+    await productPage.openProduct('Pliers');
     await productPage.addToCart();
+
+    // ação que queremos testar
+
     await productPage.openCart();
     await productPage.removeProduct();
 
-    await productPage.validateProductRemoved('Pliers');
-});
+    // validação
+
+  await productPage.validateProductRemoved();
+    });

@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class ProductPage {
 
@@ -79,9 +79,9 @@ async removeProduct() {
 async openCart() {
     await this.cartLink.click();
 }
-async validateProductRemoved(nomeProduto: string) {
-    await this.page
-        .getByText(nomeProduto, { exact: true })
-        .waitFor({ state: 'detached' });
+async validateProductRemoved() {
+    await expect(
+        this.page.getByText('Product deleted.')
+    ).toBeVisible();
 }
 } // <-- esta é a chave que fecha a classe ProductPage
