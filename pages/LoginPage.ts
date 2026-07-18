@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 export class LoginPage {
 
@@ -43,5 +43,10 @@ export class LoginPage {
         'customer@practicesoftwaretesting.com',
         'welcome01'
     );
+}
+async validarTelaLogin() {
+    await expect(
+        this.page.locator('[data-test="nav-sign-in"]')
+    ).toBeVisible();
 }
 }
