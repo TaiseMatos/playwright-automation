@@ -23,3 +23,27 @@ test('Consultar usuários', async ({ request }) => {
     expect(body.data[0].email).toBe('michael.lawson@reqres.in');
 
 });
+
+test('Cadastrar um usuário', async ({ request }) => {
+  const response = await request.post(
+    'https://reqres.in/api/users',
+    {
+      headers: {
+        'x-api-key': process.env.REQRES_API_KEY!
+      },
+      data: {
+        name: 'Taise',
+        job: 'QA Automation'
+      }
+    }
+  );
+
+  expect(response.status()).toBe(201);
+
+  const body = await response.json();
+
+  expect(body.name).toBe('Taise');
+  expect(body.job).toBe('QA Automation');
+  expect(body.id).toBeDefined();
+  expect(body.createdAt).toBeDefined();
+});
