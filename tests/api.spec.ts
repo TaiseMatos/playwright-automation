@@ -47,3 +47,28 @@ test('Cadastrar um usuário', async ({ request }) => {
   expect(body.id).toBeDefined();
   expect(body.createdAt).toBeDefined();
 });
+
+test('Atualizar um usuário', async ({ request }) => {
+
+  const response = await request.put(
+    'https://reqres.in/api/users/2',
+    {
+      headers: {
+        'x-api-key': process.env.REQRES_API_KEY!
+      },
+      data: {
+        name: 'Taise',
+        job: 'QA Automation'
+      }
+    }
+  );
+
+  expect(response.status()).toBe(200);
+
+  const body = await response.json();
+
+  expect(body.name).toBe('Taise');
+  expect(body.job).toBe('QA Automation');
+  expect(body.updatedAt).toBeDefined();
+
+});
