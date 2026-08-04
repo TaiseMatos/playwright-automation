@@ -72,3 +72,28 @@ test('Atualizar um usuário', async ({ request }) => {
   expect(body.updatedAt).toBeDefined();
 
 });
+
+test('Excluir um usuário', async ({ request }) => {
+
+  const response = await request.delete(
+    'https://reqres.in/api/users/2',
+    {
+      headers: {
+        'x-api-key': process.env.REQRES_API_KEY!
+      }
+    }
+  );
+
+  expect(response.status()).toBe(204);
+
+});
+
+test('Não deve consultar usuários sem API Key', async ({ request }) => {
+
+  const response = await request.get(
+    'https://reqres.in/api/users?page=2'
+  );
+
+  expect(response.status()).toBe(401);
+
+});
